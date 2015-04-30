@@ -7,7 +7,7 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 import java.util.concurrent.RecursiveTask;
 
-public class ForkAndJoinTest extends RecursiveTask{
+public class ConcurrentMergeSort extends RecursiveTask{
 
 	public static final int INSERT_SORT_LENGTH = 23;
 	private static final long serialVersionUID = 1L;
@@ -29,8 +29,8 @@ public class ForkAndJoinTest extends RecursiveTask{
 		}else{
 			
 			int mid = (end + start)/2;
-			ForkAndJoinTest left = new ForkAndJoinTest(array,start,mid);
-			ForkAndJoinTest right = new ForkAndJoinTest(array,mid,end);
+			ForkAndJoinTest left = new ConcurrentMergeSort(array,start,mid);
+			ForkAndJoinTest right = new ConcurrentMergeSort(array,mid,end);
 			
 			left.fork();
 			right.fork();
@@ -59,7 +59,7 @@ public class ForkAndJoinTest extends RecursiveTask{
 		int[] array = new SuijiArray(50000).get();
 		int[] barray = deepCopy(array);
 		int[] carray = deepCopy(array);
-		ForkAndJoinTest test = new ForkAndJoinTest(array,0,array.length);
+		ForkAndJoinTest test = new ConcurrentMergeSort(array,0,array.length);
 		long end = 0l;
 		long start = System.currentTimeMillis();
 		Future future = forkJoinPool.submit(test); 
